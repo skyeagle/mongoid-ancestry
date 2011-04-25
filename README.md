@@ -11,7 +11,7 @@ To apply Mongoid-ancestry to any Mongoid model, follow these simple steps:
 
 1. Install
 
-  * Add to Gemfile: `gem 'ancestry'`
+  * Add to Gemfile: `gem 'mongoid-ancestry'`
   * Install required gems: `bundle install`
 
 2. Add ancestry to your model
