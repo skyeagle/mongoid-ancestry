@@ -42,6 +42,8 @@ module Mongoid
           self.cattr_accessor :depth_cache_field
           self.depth_cache_field = opts[:depth_cache_field]
 
+#          self.field depth_cache_field, :type => Integer, :default => 0
+
           # Cache depth in depth cache column before save
           before_validation :cache_depth
 
