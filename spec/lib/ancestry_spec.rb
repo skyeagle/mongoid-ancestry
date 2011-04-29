@@ -57,6 +57,29 @@ describe MongoidAncestry do
     end
   end
 
+  context "with depth caching" do
+    it "should have ancestry_depth field" do
+      subject.with_model :cache_depth => true do |model|
+        model.fields['ancestry_depth'].options[:type].should eql(Integer)
+      end
+    end
+
+    it "should have non default ancestry field" do
+      subject.with_model :cache_depth => true, :depth_cache_field => :alternative_ancestry_depth do |model|
+        model.depth_cache_field.should eql(:alternative_ancestry_depth)
+      end
+    end
+
+    it "should set depth cache field" do
+      subject.with_model :cache_depth => true do |model|
+        model.depth_cache_field = :cached_depth
+        model.depth_cache_field.should eql(:cached_depth)
+        model.depth_cache_field = :ancestry_depth
+        model.depth_cache_field.should eql(:ancestry_depth)
+      end
+    end
+  end
+
   it "should setup test nodes" do
     subject.with_model :depth => 3, :width => 3 do |model, roots|
       roots.class.should eql(Array)
