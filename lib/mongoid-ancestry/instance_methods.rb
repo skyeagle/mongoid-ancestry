@@ -118,7 +118,7 @@ module Mongoid
       end
 
       def parent_id= parent_id
-        self.parent = parent_id.blank? ? nil : current_search.find(parent_id)
+        self.parent = parent_id.blank? ? nil : current_search_scope.find(parent_id)
       end
 
       def parent_id
@@ -126,7 +126,7 @@ module Mongoid
       end
 
       def parent
-        parent_id.blank? ? nil : current_search.find(parent_id)
+        parent_id.blank? ? nil : current_search_scope.find(parent_id)
       end
 
       # Root
@@ -135,7 +135,7 @@ module Mongoid
       end
 
       def root
-        (root_id == id) ? self : current_search.find(root_id)
+        (root_id == id) ? self : current_search_scope.find(root_id)
       end
 
       def is_root?
