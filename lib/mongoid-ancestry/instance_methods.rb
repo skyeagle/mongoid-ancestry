@@ -76,7 +76,7 @@ module Mongoid
       
       # Scope
       def current_search_scope
-        self.class.search_scope ? self.send(self.class.search_scope).send(self.base_class.to_s.tableize) : self.base_class
+        self.embedded? ? self._parent.send(self.base_class.to_s.tableize) : self.base_class
       end
       
       # Ancestors

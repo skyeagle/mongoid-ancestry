@@ -7,7 +7,6 @@ module Mongoid
           :cache_depth       => false,
           :depth_cache_field => :ancestry_depth,
           :orphan_strategy   => :destroy,
-          :embedded_in       => nil
         }
 
         valid_opts = [:ancestry_field, :cache_depth, :depth_cache_field, :orphan_strategy, :embedded_in]
@@ -29,10 +28,6 @@ module Mongoid
         # Create orphan strategy accessor and set to option or default (writer comes from DynamicClassMethods)
         cattr_reader :orphan_strategy
         self.orphan_strategy = opts[:orphan_strategy]
-        
-        # Search scope for embedded_in associations
-        cattr_reader :search_scope
-        self.search_scope = opts[:embedded_in]
 
         # Validate format of ancestry column value
         primary_key_format = opts[:primary_key_format] || /[a-z0-9]+/
@@ -93,11 +88,6 @@ module Mongoid
             raise Error.new("Unknown depth option: #{scope_name}.")
           end
         end
-      end
-      
-      # Search_scope writer
-      def search_scope= search_scope
-        class_variable_set :@@search_scope, search_scope
       end
 
       # Orphan strategy writer
