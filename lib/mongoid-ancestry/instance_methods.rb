@@ -73,7 +73,12 @@ module Mongoid
           "#{self.send "#{self.base_class.ancestry_field}_was"}/#{id}"
         end
       end
-
+      
+      # Scope
+      def current_search_scope
+        self.embedded? ? self._parent.send(self.base_class.to_s.tableize) : self.base_class
+      end
+      
       # Ancestors
       def ancestor_ids
         read_attribute(self.base_class.ancestry_field).to_s.split('/').map { |id| cast_primary_key(id) }
@@ -113,7 +118,7 @@ module Mongoid
       end
 
       def parent_id= parent_id
-        self.parent = parent_id.blank? ? nil : self.base_class.find(parent_id)
+        self.parent = parent_id.blank? ? nil : current_search_scope.find(parent_id)
       end
 
       def parent_id
@@ -121,7 +126,7 @@ module Mongoid
       end
 
       def parent
-        parent_id.blank? ? nil : self.base_class.find(parent_id)
+        parent_id.blank? ? nil : current_search_scope.find(parent_id)
       end
 
       # Root
@@ -130,7 +135,7 @@ module Mongoid
       end
 
       def root
-        (root_id == id) ? self : self.base_class.find(root_id)
+        (root_id == id) ? self : current_search_scope.find(root_id)
       end
 
       def is_root?
@@ -143,7 +148,7 @@ module Mongoid
       end
 
       def children
-        self.base_class.where(child_conditions)
+        current_search_scope.where(child_conditions)
       end
 
       def child_ids

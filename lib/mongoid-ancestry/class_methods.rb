@@ -6,10 +6,10 @@ module Mongoid
           :ancestry_field    => :ancestry,
           :cache_depth       => false,
           :depth_cache_field => :ancestry_depth,
-          :orphan_strategy   => :destroy
+          :orphan_strategy   => :destroy,
         }
 
-        valid_opts = [:ancestry_field, :cache_depth, :depth_cache_field, :orphan_strategy]
+        valid_opts = [:ancestry_field, :cache_depth, :depth_cache_field, :orphan_strategy, :embedded_in]
         unless opts.is_a?(Hash) &&  opts.keys.all? {|opt| valid_opts.include?(opt) }
           raise Error.new("Invalid options for has_ancestry. Only hash is allowed.\n Defaults: #{defaults.inspect}")
         end
