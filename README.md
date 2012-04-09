@@ -1,6 +1,8 @@
 Mongoid-ancestry
 ================
 
+[![travis](https://secure.travis-ci.org/joe1chen/mongoid-ancestry.png)](http://travis-ci.org/joe1chen/mongoid-ancestry)
+
 Mongoid-ancestry is a gem/plugin that allows the records of a Ruby on Rails Mongoid model to be organised as a tree structure (or hierarchy). It uses a single, intuitively formatted database column, using a variation on the materialised path pattern. It exposes all the standard tree structure relations (ancestors, parent, root, children, siblings, descendants) and all of them can be fetched in a single query. Additional features are STI support, scopes, depth caching, depth constraints, easy migration from older plugins/gems, integrity checking, integrity restoration, arrangement of (sub)tree into hashes and different strategies for dealing with orphaned records.
 
 ## Installation

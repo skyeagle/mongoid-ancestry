@@ -8,9 +8,8 @@ module Mongoid
     included do
       cattr_accessor :base_class
       self.base_class = self
-      
-      require 'mongoid-ancestry/instance_methods'
-      include InstanceMethods
     end
+
+    require 'mongoid-ancestry/instance_methods'
   end
 end
