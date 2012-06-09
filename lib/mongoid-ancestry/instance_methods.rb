@@ -229,7 +229,7 @@ module Mongoid
       if primary_key_type == Integer
         key.to_i
       elsif primary_key_type == BSON::ObjectId && key =~ /[a-z0-9]{24}/
-        BSON::ObjectId.convert(self, key)
+        BSON::ObjectId.from_string(key)
       else
         key
       end

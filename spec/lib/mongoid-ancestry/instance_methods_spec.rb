@@ -133,14 +133,14 @@ describe MongoidAncestry do
         root1.parent = root2
         root1.save!
         root1.descendants.asc(:_id).map(&:to_param).should eql(descendants)
-      }.to change(root2.descendants, 'size').by(root1.subtree.size)
+      }.to change(root2.descendants, 'count').by(root1.subtree.count)
 
       descendants = root2.descendants.asc(:_id).map(&:to_param)
       expect {
         root2.parent = root3
         root2.save!
         root2.descendants.asc(:_id).map(&:to_param).should eql(descendants)
-      }.to change(root3.descendants, 'size').by(root2.subtree.size)
+      }.to change(root3.descendants, 'count').by(root2.subtree.count)
 
       descendants = root1.descendants.asc(:_id).map(&:to_param)
       expect {
@@ -148,8 +148,8 @@ describe MongoidAncestry do
           root1.parent = nil
           root1.save!
           root1.descendants.asc(:_id).map(&:to_param).should eql(descendants)
-        }.to change(root3.descendants, 'size').by(-root1.subtree.size)
-      }.to change(root2.descendants, 'size').by(-root1.subtree.size)
+        }.to change(root3.descendants, 'count').by(-root1.subtree.count)
+      }.to change(root2.descendants, 'count').by(-root1.subtree.count)
     end
   end
 

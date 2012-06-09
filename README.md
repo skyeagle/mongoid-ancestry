@@ -23,6 +23,12 @@ To apply Mongoid-ancestry to any Mongoid model, follow these simple steps:
 
 Your model is now a tree!
 
+## Mongoid compatibility
+
+This gem only supports Mongoid 3.x starting with version 0.3.0.
+
+If you want to use Mongoid version 2.x, you should either use this gem in a 0.2.x version or checkout the "mongoid-2.4-stable" branch. You can ask bundler to stick with 0.2.x versions of this gem by adding this to your Gemfile: `gem 'mongoid-ancestry', '~> 0.2.2'`
+
 ## Organising records into a tree
 You can use the parent attribute to organise your records into a tree. If you have the id of the record you want
 to use as a parent and don't want to fetch it, you can also use `parent_id`. Like any virtual model attributes,
@@ -220,7 +226,7 @@ The materialised path pattern requires Mongoid-ancestry to use a `regexp` condit
 
 ## Contact and copyright
 
-It's a fork of [original ancestry](https://github.com/stefankroes/ancestry) gem but adopted to work with Mongoid.
+It's a fork of [original ancestry](https://github.com/stefankroes/ancestry) gem but adapted to work with Mongoid.
 
 All thanks should goes to Stefan Kroes for his great work.
 

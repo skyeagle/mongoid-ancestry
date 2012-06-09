@@ -23,7 +23,7 @@ module Mongoid
         self.ancestry_field = opts[:ancestry_field]
 
         self.field ancestry_field, :type => String
-        self.index ancestry_field
+        self.index({ ancestry_field => 1 })
 
         # Create orphan strategy accessor and set to option or default (writer comes from DynamicClassMethods)
         cattr_reader :orphan_strategy
@@ -167,7 +167,7 @@ module Mongoid
             end
           end
           # ... save parent of this node in parents array if it exists
-          parents[node.id] = node.parent_id if exists? node.parent_id
+          parents[node.id] = node.parent_id if where(:_id => node.parent_id).first
 
           # Reset parent id in array to nil if it introduces a cycle
           parent = parents[node.id]

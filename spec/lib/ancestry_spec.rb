@@ -80,7 +80,7 @@ describe MongoidAncestry do
   end
 
   it "should have STI support" do
-    subject.with_model :extra_columns => {:type => :string} do |model|
+    subject.with_model :extra_columns => {:type => 'String'} do |model|
       subclass1 = Object.const_set 'Subclass1', Class.new(model)
       (class << subclass1; self; end).send(:define_method, :model_name) do
       Struct.new(:human, :underscore).new 'Subclass1', 'subclass1'

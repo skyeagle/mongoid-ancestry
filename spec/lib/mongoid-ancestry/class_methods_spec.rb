@@ -232,7 +232,7 @@ describe MongoidAncestry do
   end
 
   it "should build ancestry from parent ids" do
-    subject.with_model :skip_ancestry => true, :extra_columns => {:parent_id => :integer} do |model|
+    subject.with_model :skip_ancestry => true, :extra_columns => {:parent_id => 'BSON::ObjectId'} do |model|
       [model.create!].each do |parent1|
         (Array.new(5) { model.create :parent_id => parent1.id }).each do |parent2|
           (Array.new(5) { model.create :parent_id => parent2.id }).each do |parent3|

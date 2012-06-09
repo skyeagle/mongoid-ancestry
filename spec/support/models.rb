@@ -14,7 +14,7 @@ class MongoidAncestry
       TestNode.send(:include, Mongoid::Ancestry) unless skip_ancestry
 
       extra_columns.each do |name, type|
-        TestNode.send :field, name, :type => type.to_s.capitalize.constantize
+        TestNode.send :field, name, :type => type.constantize
       end unless extra_columns.nil?
 
       TestNode.has_ancestry options unless skip_ancestry
