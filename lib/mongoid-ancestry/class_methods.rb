@@ -22,8 +22,8 @@ module Mongoid
         cattr_accessor :ancestry_field
         self.ancestry_field = opts[:ancestry_field]
 
-        self.field ancestry_field, :type => String
-        self.index({ ancestry_field => 1 })
+        self.field ancestry_field.to_sym, :type => String
+        self.index({ ancestry_field.to_s => 1 })
 
         # Create orphan strategy accessor and set to option or default (writer comes from DynamicClassMethods)
         cattr_reader :orphan_strategy
