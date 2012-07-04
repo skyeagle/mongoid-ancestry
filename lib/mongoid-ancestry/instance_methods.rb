@@ -228,8 +228,8 @@ module Mongoid
     def cast_primary_key(key)
       if primary_key_type == Integer
         key.to_i
-      elsif primary_key_type == BSON::ObjectId && key =~ /[a-z0-9]{24}/
-        BSON::ObjectId.from_string(key)
+      elsif primary_key_type == Moped::BSON::ObjectId && key =~ /[a-z0-9]{24}/
+        Moped::BSON::ObjectId.from_string(key)
       else
         key
       end
