@@ -23,6 +23,6 @@ Gem::Specification.new do |s|
     "README.md"
   ]
 
-  s.add_dependency('mongoid', "~> 3.0.3")
+  s.add_dependency('mongoid', "~> 3.0")
 end
 
