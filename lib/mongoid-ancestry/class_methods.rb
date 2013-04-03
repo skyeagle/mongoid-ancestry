@@ -31,7 +31,7 @@ module Mongoid
         self.orphan_strategy = opts[:orphan_strategy]
 
         # Create touch accessor and set to option or default
-        cattr_reader :touchable
+        cattr_accessor :touchable
         self.touchable = opts[:touchable]
 
         # Validate format of ancestry column value
