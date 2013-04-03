@@ -34,6 +34,18 @@ describe MongoidAncestry do
     end
   end
 
+  it "should have default touchable value" do
+    subject.with_model do |model|
+      model.touchable.should be_false
+    end
+  end
+
+  it "should set touchable value" do
+    subject.with_model touchable: true do |model|
+      model.touchable.should be_true
+    end
+  end
+
   it "should have non default orphan strategy" do
     subject.with_model :orphan_strategy => :rootify do |model|
       model.orphan_strategy.should eql(:rootify)

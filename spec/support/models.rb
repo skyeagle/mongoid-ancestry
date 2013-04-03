@@ -12,6 +12,7 @@ class MongoidAncestry
       const_set 'TestNode', model
       TestNode.send(:include, Mongoid::Document)
       TestNode.send(:include, Mongoid::Ancestry) unless skip_ancestry
+      TestNode.send(:include, Mongoid::Timestamps) if options[:touchable]
 
       extra_columns.each do |name, type|
         TestNode.send :field, name, :type => type.constantize
