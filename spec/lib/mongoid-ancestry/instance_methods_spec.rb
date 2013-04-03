@@ -237,5 +237,16 @@ describe MongoidAncestry do
     end
   end
 
+  it "should call touch on parent" do
+    # Mongoid::Document.should_receive(:touch)
+
+    subject.with_model touchable: true do |model|
+      root = model.create!
+      lambda {
+        root.children.create!
+      }.should change(root, :updated_at)
+    end
+  end
+
 
 end
