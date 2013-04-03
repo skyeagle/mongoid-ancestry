@@ -110,9 +110,7 @@ module Mongoid
     # Parent
     def parent= parent
       write_attribute(self.base_class.ancestry_field, parent.blank? ? nil : parent.child_ancestry)
-      unless parent.nil?
-        parent.touch if parent.touchable
-      end
+      parent.touch if parent.respond_to?(:touchable)
     end
 
     def parent_id= parent_id
