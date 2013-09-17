@@ -121,7 +121,8 @@ module Mongoid
     end
 
     def parent_id
-      ancestor_ids.empty? ? nil : ancestor_ids.last
+      parent_id = read_attribute(self.base_class.ancestry_field).to_s.split('/').last
+      return cast_primary_key(parent_id) if parent_id
     end
 
     def parent
