@@ -88,7 +88,7 @@ module Mongoid
     end
 
     def ancestors depth_options = {}
-      self.base_class.scope_depth(depth_options, depth).where(ancestor_conditions)
+      self.base_class.scope_depth(depth_options, depth).where(ancestor_conditions).ordered_by_ancestry
     end
 
     def path_ids
@@ -100,7 +100,7 @@ module Mongoid
     end
 
     def path depth_options = {}
-      self.base_class.scope_depth(depth_options, depth).where(path_conditions)
+      self.base_class.scope_depth(depth_options, depth).where(path_conditions).ordered_by_ancestry
     end
 
     def depth
@@ -193,7 +193,7 @@ module Mongoid
     end
 
     def descendants depth_options = {}
-      self.base_class.scope_depth(depth_options, depth).any_of(descendant_conditions)
+      self.base_class.scope_depth(depth_options, depth).any_of(descendant_conditions).ordered_by_ancestry
     end
 
     def descendant_ids depth_options = {}
@@ -210,7 +210,7 @@ module Mongoid
     end
 
     def subtree depth_options = {}
-      self.base_class.scope_depth(depth_options, depth).any_of(subtree_conditions)
+      self.base_class.scope_depth(depth_options, depth).any_of(subtree_conditions).ordered_by_ancestry
     end
 
     def subtree_ids depth_options = {}
