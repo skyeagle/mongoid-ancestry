@@ -19,17 +19,17 @@ describe MongoidAncestry do
         # Root assertions
         lvl0_node.root_id.should eql(lvl0_node.id)
         lvl0_node.root.should eql(lvl0_node)
-        lvl0_node.is_root?.should be_true
+        lvl0_node.is_root?.should be_truthy
         # Children assertions
         lvl0_node.child_ids.should eql(lvl0_children.map(&:first).map(&:id))
         lvl0_node.children.to_a.should eql(lvl0_children.map(&:first))
-        lvl0_node.has_children?.should be_true
-        lvl0_node.is_childless?.should be_false
+        lvl0_node.has_children?.should be_truthy
+        lvl0_node.is_childless?.should be_falsey
         # Siblings assertions
         lvl0_node.sibling_ids.should eql(roots.map(&:first).map(&:id))
         lvl0_node.siblings.to_a.should eql(roots.map(&:first))
-        lvl0_node.has_siblings?.should be_true
-        lvl0_node.is_only_child?.should be_false
+        lvl0_node.has_siblings?.should be_truthy
+        lvl0_node.is_only_child?.should be_falsey
         # Descendants assertions
         descendants = model.all.find_all do |node|
           node.ancestor_ids.include?(lvl0_node.id)
@@ -51,17 +51,17 @@ describe MongoidAncestry do
           # Root assertions
           lvl1_node.root_id.should eql(lvl0_node.id)
           lvl1_node.root.should eql(lvl0_node)
-          lvl1_node.is_root?.should be_false
+          lvl1_node.is_root?.should be_falsey
           # Children assertions
           lvl1_node.child_ids.should eql(lvl1_children.map(&:first).map(&:id))
           lvl1_node.children.to_a.should eql(lvl1_children.map(&:first))
-          lvl1_node.has_children?.should be_true
-          lvl1_node.is_childless?.should be_false
+          lvl1_node.has_children?.should be_truthy
+          lvl1_node.is_childless?.should be_falsey
           # Siblings assertions
           lvl1_node.sibling_ids.should eql(lvl0_children.map(&:first).map(&:id))
           lvl1_node.siblings.to_a.should eql(lvl0_children.map(&:first))
-          lvl1_node.has_siblings?.should be_true
-          lvl1_node.is_only_child?.should be_false
+          lvl1_node.has_siblings?.should be_truthy
+          lvl1_node.is_only_child?.should be_falsey
           # Descendants assertions
           descendants = model.all.find_all do |node|
             node.ancestor_ids.include? lvl1_node.id
@@ -84,17 +84,17 @@ describe MongoidAncestry do
             # Root assertions
             lvl2_node.root_id.should eql(lvl0_node.id)
             lvl2_node.root.should eql(lvl0_node)
-            lvl2_node.is_root?.should be_false
+            lvl2_node.is_root?.should be_falsey
             # Children assertions
             lvl2_node.child_ids.should eql([])
             lvl2_node.children.to_a.should eql([])
-            lvl2_node.has_children?.should be_false
-            lvl2_node.is_childless?.should be_true
+            lvl2_node.has_children?.should be_falsey
+            lvl2_node.is_childless?.should be_truthy
             # Siblings assertions
             lvl2_node.sibling_ids.should eql(lvl1_children.map(&:first).map(&:id))
             lvl2_node.siblings.to_a.should eql(lvl1_children.map(&:first))
-            lvl2_node.has_siblings?.should be_true
-            lvl2_node.is_only_child?.should be_false
+            lvl2_node.has_siblings?.should be_truthy
+            lvl2_node.is_only_child?.should be_falsey
             # Descendants assertions
             descendants = model.all.find_all do |node|
               node.ancestor_ids.include? lvl2_node.id
@@ -114,12 +114,12 @@ describe MongoidAncestry do
       ['3', '10/2', '1/4/30', nil].each do |value|
         node.send :write_attribute, model.ancestry_field, value
         node.should be_valid
-        node.errors[model.ancestry_field].blank?.should be_true
+        node.errors[model.ancestry_field].blank?.should be_truthy
       end
       ['1/3/', '/2/3', 'A/b', '-34', '/54'].each do |value|
         node.send :write_attribute, model.ancestry_field, value
         node.should_not be_valid
-        node.errors[model.ancestry_field].blank?.should be_false
+        node.errors[model.ancestry_field].blank?.should be_falsey
       end
     end
   end
