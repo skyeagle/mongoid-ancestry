@@ -206,11 +206,11 @@ describe MongoidAncestry do
 
   it "should have depth scopes" do
     subject.with_model :depth => 4, :width => 2, :cache_depth => true do |model, roots|
-      model.before_depth(2).all? { |node| node.depth < 2 }.should be_true
-      model.to_depth(2).all?     { |node| node.depth <= 2 }.should be_true
-      model.at_depth(2).all?     { |node| node.depth == 2 }.should be_true
-      model.from_depth(2).all?   { |node| node.depth >= 2 }.should be_true
-      model.after_depth(2).all?  { |node| node.depth > 2 }.should be_true
+      model.before_depth(2).all? { |node| node.depth < 2 }.should be_truthy
+      model.to_depth(2).all?     { |node| node.depth <= 2 }.should be_truthy
+      model.at_depth(2).all?     { |node| node.depth == 2 }.should be_truthy
+      model.from_depth(2).all?   { |node| node.depth >= 2 }.should be_truthy
+      model.after_depth(2).all?  { |node| node.depth > 2 }.should be_truthy
     end
   end
 

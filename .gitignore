@@ -42,3 +42,5 @@ pkg
 #*.swp
 .ruby-version
 Gemfile.lock
+.idea/
+.DS_Store

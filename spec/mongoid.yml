@@ -1,5 +1,12 @@
+# test:
+#   sessions:
+#     default:
+#       database: ancestry_test
+#       hosts:
+#         - localhost:27017
+
 test:
-  sessions:
+  clients:
     default:
       database: ancestry_test
       hosts:
